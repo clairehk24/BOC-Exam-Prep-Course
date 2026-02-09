@@ -482,170 +482,30 @@
         "Domain 5: Health Administration and Professional Responsibility",
       ];
 
-      /* -------------------- Question bank --------------------
-Hot spot supports:
-- "author mode": click once to store correct answer (saved in localStorage)
-- learner mode: drag circle; submit checks distance <= tolerance
--------------------------------------------------------- */
-      const QUESTIONS = [
-        /* MC */
-        {
-          id: "mc1",
-          type: "mc",
-          category: DOMAINS[1],
-          difficulty: "medium",
-          prompt: "An athlete experiences a varus force on the proximal tibia. What type of fracture is he most likely to experience?",
-          choices: ["Lateral", "Bicondylar", "Medial", "Bicondylar with soft tissue injuries"],
-          answer: 2,
-          rationale: "",
-        },
-        {
-          id: "mc2",
-          type: "mc",
-          category: DOMAINS[0],
-          difficulty: "medium",
-          prompt: "Why are children at a greater risk for heat-related illness?",
-          choices: ["They sweat more.", "They have higher subcutaneous fat stores.", "They have a reduced capacity to evaporate sweat.", "They have higher breathing rates."],
-          answer: 2,
-          rationale: "",
-        },
+      /* -------------------- Question bank --------------------- */
+      let QUESTIONS = []; // not const
 
-        /* MS */
-        {
-          id: "ms1",
-          type: "ms",
-          category: DOMAINS[2],
-          difficulty: "medium",
-          prompt: "Which of the following are typical symptoms of someone suffering from acute stroke?",
-          choices: ["numbness or weakness of the face, arm, or leg", "confusion, speech problems, and cognitive defects", "normal vision", "impaired coordination and walking"],
-          answer: [0, 1, 3],
-          rationale: "",
-        },
-        {
-          id: "ms2",
-          type: "ms",
-          category: DOMAINS[1],
-          difficulty: "hard",
-          prompt: "Which of the following accurately describes fibromyalgia? Select all that apply.",
-          choices: [
-            "characterized by local tissue injury",
-            "only occurs in patients with depression",
-            "responds well to most interventions with known analgesic effects",
-            "characterized by widespread muscle, joint, and connective tissue pain",
-            "occurs in the absence of tissue injury",
-          ],
-          answer: [3, 4],
-          rationale: "",
-        },
+      loadQuestionsAndStart();
 
-        /* DD matching */
-        {
-          id: "dd1",
-          type: "dd",
-          category: DOMAINS[1],
-          difficulty: "medium",
-          prompt: "Type: Matching drag drop\n\nMatch the pain with the structure and pathology.",
-          dd: {
-            tokens: ["musculoskeletal pain", "chronic inflammation", "serious pathology", "lumbar stenosis", "bone pain"],
-            zones: [
-              { label: "pain that decreases at rest", accept: "musculoskeletal pain" },
-              { label: "morning pain that decreases with movement", accept: "chronic inflammation" },
-              { label: "pain at night that is intractable", accept: "serious pathology" },
-              { label: "pain that occurs with walking but is relieved when seated", accept: "lumbar stenosis" },
-              { label: "pain at rest and during activity", accept: "bone pain" },
-            ],
-          },
-          rationale: "",
-        },
-        {
-          id: "dd2",
-          type: "dd",
-          category: DOMAINS[1],
-          difficulty: "medium",
-          prompt: "Type: Matching drag drop\n\nMatch the motor function.",
-          dd: {
-            tokens: ["C2", "C4", "C6", "C8"],
-            zones: [
-              { label: "cervical extension", accept: "C2" },
-              { label: "shoulder shrug", accept: "C4" },
-              { label: "elbow flexion and wrist extension", accept: "C6" },
-              { label: "thumb extension", accept: "C8" },
-            ],
-          },
-          rationale: "",
-        },
+      async function loadQuestionsAndStart() {
+        try {
+          const res = await fetch("data/questions.json", { cache: "no-store" });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
 
-        /* HS (UPDATED question text; image is a placeholder path you will replace) */
-        {
-          id: "hs_knee1",
-          type: "hs",
-          category: DOMAINS[1],
-          difficulty: "medium",
-          prompt: `During the evaluation of a patients knee injury the athletic trainer palpates the tibial tuberosity. On the image below, identify the tibial tuberosity.
+          if (!data || !Array.isArray(data.questions)) {
+            throw new Error("questions.json missing { questions: [...] }");
+          }
 
-Use your mouse and click/drag the circle to the area/region to be identified. You may reposition the circle until you are satisfied with its placement.`,
-          hs: {
-            imageSrc: "Images/Knee cap.png", // <- replace with your actual file path (e.g., images/knee.png)
-            tolerancePct: 6, // <- radius tolerance in % of container min dimension
-            answer: { xPct: 51.6, yPct: 86.6 }, // <- correct answer coordinates in % of image dimensions (0,0 is top-left; 100,100 is bottom-right)
-          },
-          rationale: "",
-        },
-
-        /* Focused Testlet */
-        {
-          id: "ft1",
-          type: "ft",
-          category: DOMAINS[1],
-          difficulty: "hard",
-          title: "Focused testlet",
-          scenario:
-            "A 70-year-old client presents to your clinic with shoulder pain that is worse at night. The client does not remember any trauma and reports insidious onset. Her AROM is limited in shoulder flexion and abduction. She has a positive painful arc and has weakness in abduction and external rotation.",
-          questions: [
-            {
-              id: "ft1_q1",
-              type: "ms",
-              prompt: "1. What are the most appropriate special tests to perform. Select all that apply.",
-              choices: ["Spurling’s", "Apprehension test", "Empty can", "Crank test"],
-              answer: [2],
-              rationale: "",
-            },
-            {
-              id: "ft1_q2",
-              type: "mc",
-              prompt:
-                "No change in symptoms is noted with the Spurling’s test, apprehension test, or crank test. The empty can test was positive.\n\n2. Based on the noted shoulder weakness and positive special test, the most likely diagnosis is",
-              choices: ["rotator cuff tear", "radiculopathy", "partial radiculopathy", "inconclusive (further testing needed)"],
-              answer: 0,
-              rationale: "",
-            },
-            {
-              id: "ft1_q3",
-              type: "ms",
-              prompt: "3. You would like to start your patient on AAROM exercises for home. What are the most appropriate exercises for your patient to perform at home? Select all that apply.",
-              choices: ["wall climbs using fingers to assist", "pendulums", "bilateral shoulder flexion using a cane", "wall push-ups"],
-              answer: [0, 2],
-              rationale: "",
-            },
-            {
-              id: "ft1_q4",
-              type: "mc",
-              prompt: "4. (Placeholder) Add your 4th testlet question here.",
-              choices: ["Option A", "Option B", "Option C", "Option D"],
-              answer: 0,
-              rationale: "Replace this placeholder with your content.",
-            },
-            {
-              id: "ft1_q5",
-              type: "ms",
-              prompt: "5. (Placeholder) Add your 5th testlet question here. Select all that apply.",
-              choices: ["Option A", "Option B", "Option C", "Option D"],
-              answer: [0],
-              rationale: "Replace this placeholder with your content.",
-            },
-          ],
-        },
-      ];
+          QUESTIONS = data.questions;
+          init(); // start the app only after questions are loaded
+        } catch (err) {
+          console.error("Failed to load questions.json", err);
+          // Optional: show a user-facing message
+          const qText = document.getElementById("qText");
+          if (qText) qText.textContent = "Error: could not load data/questions.json. Check console and file paths.";
+        }
+      }
 
       /* -------------------- Persistence (no accounts) -------------------- */
       const STORAGE_KEY_ATTEMPTS = "quiz_attempts_v1";
@@ -717,7 +577,6 @@ attempts: {
       const timer = { running: false, sessionMs: 0, questionMs: 0, lastTick: null, intervalId: null };
 
       /* -------------------- init -------------------- */
-      init();
       function init() {
         el("year").textContent = String(new Date().getFullYear());
         const domains = ["all", ...DOMAINS];
