@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>BOC Exam Prep Course</title>
+    <style>
+      :root {
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        background: #f6f7fb;
+        color: #111;
+      }
+
+      header {
+        padding: 16px 20px;
+        background: #fff;
+        border-bottom: 1px solid #e7e7ef;
+      }
+      header .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      header .title {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 0.2px;
+      }
+      header .sub {
+        color: #555;
+        font-size: 13px;
+      }
+
+      footer {
+        margin-top: 18px;
+        background: #fff;
+        border-top: 1px solid #e7e7ef;
+      }
+      footer .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .logo-ph {
+        width: 140px;
+        height: 40px;
+        border: 1px dashed #cfd2e3;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        font-size: 12px;
+        background: #fafbff;
+      }
+      .copyright {
+        color: #555;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      main {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+      .row {
+        display: grid;
+        gap: 10px;
+      }
+      @media (min-width: 980px) {
+        .row {
+          grid-template-columns: 1.1fr 0.9fr;
+          align-items: start;
+        }
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #e7e7ef;
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+      .muted {
+        color: #555;
+        font-size: 13px;
+      }
+      .pill {
+        display: inline-block;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: #f0f2f8;
+        border: 1px solid #e5e8f3;
+        margin-right: 6px;
+        margin-bottom: 6px;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+      }
+      .controls label {
+        font-size: 13px;
+        color: #333;
+      }
+      select,
+      button,
+      input[type="checkbox"] {
+        font: inherit;
+      }
+      select {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid #d7d9e6;
+        background: #fff;
+      }
+      button {
+        padding: 9px 12px;
+        border-radius: 10px;
+        border: 1px solid #d7d9e6;
+        background: #fff;
+        cursor: pointer;
+      }
+      button.primary {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .question-text {
+        font-size: 16px;
+        margin: 10px 0 12px;
+        white-space: pre-wrap;
+      }
+      .answers {
+        display: grid;
+        gap: 8px;
+      }
+      .answer {
+        padding: 10px 10px;
+        border-radius: 10px;
+        border: 1px solid #d7d9e6;
+        background: #fff;
+      }
+      .answer input {
+        margin-right: 8px;
+      }
+
+      .feedback {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #e7e7ef;
+        background: #fafbff;
+      }
+      .ok {
+        border-color: #bfe8c9;
+        background: #f1fbf4;
+      }
+      .bad {
+        border-color: #f0c1c1;
+        background: #fff5f5;
+      }
+
+      /* Drag/drop */
+      .dd-wrap {
+        display: grid;
+        gap: 10px;
+      }
+      .dd-bank {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px;
+        border: 1px dashed #cfd2e3;
+        border-radius: 12px;
+        background: #fafbff;
+      }
+      .token {
+        padding: 8px 10px;
+        border: 1px solid #d7d9e6;
+        border-radius: 999px;
+        background: #fff;
+        cursor: grab;
+        user-select: none;
+      }
+      .drop-zones {
+        display: grid;
+        gap: 10px;
+      }
+      .zone {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+        border: 1px solid #d7d9e6;
+        border-radius: 12px;
+        padding: 10px;
+        background: #fff;
+        min-height: 46px;
+      }
+      .zone .label {
+        font-weight: 600;
+      }
+      .zone .slot {
+        min-width: 260px;
+        min-height: 32px;
+        border: 1px dashed #cfd2e3;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 8px;
+        background: #fafbff;
+      }
+      .slot.over {
+        border-style: solid;
+      }
+
+      /* Timer */
+      .timerRow {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .timerBox {
+        border: 1px solid #e7e7ef;
+        background: #fafbff;
+        border-radius: 12px;
+        padding: 10px;
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+      }
+      .timerBig {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 0.3px;
+      }
+
+      /* Wrong stack display */
+      .stats {
+        display: grid;
+        gap: 8px;
+        font-size: 13px;
+      }
+      .stackPills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Focused testlet */
+      .scenario {
+        padding: 12px;
+        border: 1px solid #e7e7ef;
+        border-radius: 12px;
+        background: #fafbff;
+      }
+      .testletNav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      /* Hotspot (circle placement + author mode) */
+      .hsWrap {
+        display: grid;
+        gap: 10px;
+      }
+      .hsStage {
+        position: relative;
+        width: 100%;
+        max-width: 680px;
+        aspect-ratio: 4 / 3;
+        border: 1px solid #d7d9e6;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .hsStage img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .hsOverlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .hsCircle {
+        position: absolute;
+        width: 46px;
+        height: 46px;
+        border-radius: 999px;
+        border: 3px solid #111;
+        background: rgba(255, 255, 255, 0.25);
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        cursor: grab;
+      }
+      .hsCircle.dragging {
+        cursor: grabbing;
+      }
+      .hsHintRow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .hsHintRow .pill {
+        margin: 0;
+      }
+      .hsSmallBtn {
+        padding: 7px 10px;
+        border-radius: 10px;
+      }
+
+      .authorPanel {
+        padding: 10px;
+        border: 1px dashed #cfd2e3;
+        border-radius: 12px;
+        background: #fafbff;
+        display: grid;
+        gap: 8px;
+      }
+      .authorGrid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .authorGrid code {
+        background: #fff;
+        border: 1px solid #e7e7ef;
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="wrap">
+        <div>
+          <div class="title">BOC Exam Prep Course</div>
+          <div class="sub">Practice quizzing by domain and difficulty • wrong stack • partial credit • stopwatch • randomization</div>
+        </div>
+        <div class="stackPills">
+          <span class="pill" id="pill-total">Total: 0</span>
+          <span class="pill" id="pill-filtered">In set: 0</span>
+          <span class="pill" id="pill-score">Score: 0.0%</span>
+          <span class="pill" id="pill-wrong">Wrong stack: 0</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="row">
+        <section class="card">
+          <h2>Study controls</h2>
+
+          <div class="controls">
+            <div>
+              <label for="domainSel">Category (Domain)</label>
+              <select id="domainSel"></select>
+            </div>
+            <div>
+              <label for="diffSel">Difficulty</label>
+              <select id="diffSel">
+                <option value="all">All</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+
+            <div class="timerRow">
+              <div class="timerBox">
+                <div>
+                  <div class="muted">Session stopwatch</div>
+                  <div class="timerBig" id="sessionTime">00:00</div>
+                </div>
+                <div style="border-left: 1px solid #e7e7ef; height: 32px"></div>
+                <div>
+                  <div class="muted">Current question time</div>
+                  <div class="timerBig" id="questionTime">00:00</div>
+                </div>
+              </div>
+
+              <button id="btnTimerStart">Start</button>
+              <button id="btnTimerPause">Pause</button>
+              <button id="btnTimerReset">Reset</button>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap">
+              <button id="btnNext" class="primary">Start / Next</button>
+              <button id="btnRetryWrong">Retry wrong stack</button>
+              <button id="btnResetAttempts">Reset attempt data</button>
+            </div>
+
+            <div class="muted">
+              Randomized question order within the filtered set. Items are “mastered” once they reach 100% and are then excluded. Partial credit applies to multi-select and drag-and-drop.
+            </div>
+          </div>
+        </section>
+
+        <aside class="card">
+          <h2>Wrong stack (missed / partial)</h2>
+          <div class="stats">
+            <div id="wrongList" class="muted">None yet.</div>
+            <div class="muted">Saved locally in this browser (localStorage).</div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="card">
+        <div id="qMeta" class="muted"></div>
+        <div id="qText" class="question-text">Choose filters, then click “Start / Next”.</div>
+        <div id="qUI"></div>
+        <div id="feedback" class="feedback" style="display: none"></div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="copyright">
+          ©
+          <span id="year"></span>
+          BOC Exam Prep Course. All rights reserved.
+          <br />
+          This is a logo placeholder and copyright footer area.
+        </div>
+        <div class="logo-ph">LOGO PLACEHOLDER</div>
+      </div>
+    </footer>
+
+    <script>
+      /* -------------------- Domains -------------------- */
+      const DOMAINS = [
+        "Domain 1: Risk Reduction, Wellness and Health Literacy",
+        "Domain 2: Assessment, Evaluation and Diagnosis",
+        "Domain 3: Critical Incident Management",
+        "Domain 4: Therapeutic Intervention",
+        "Domain 5: Health Administration and Professional Responsibility",
+      ];
+
+      /* -------------------- Question bank --------------------
+Hot spot supports:
+- "author mode": click once to store correct answer (saved in localStorage)
+- learner mode: drag circle; submit checks distance <= tolerance
+-------------------------------------------------------- */
+      const QUESTIONS = [
+        /* MC */
+        {
+          id: "mc1",
+          type: "mc",
+          category: DOMAINS[1],
+          difficulty: "medium",
+          prompt: "An athlete experiences a varus force on the proximal tibia. What type of fracture is he most likely to experience?",
+          choices: ["Lateral", "Bicondylar", "Medial", "Bicondylar with soft tissue injuries"],
+          answer: 2,
+          rationale: "",
+        },
+        {
+          id: "mc2",
+          type: "mc",
+          category: DOMAINS[0],
+          difficulty: "medium",
+          prompt: "Why are children at a greater risk for heat-related illness?",
+          choices: ["They sweat more.", "They have higher subcutaneous fat stores.", "They have a reduced capacity to evaporate sweat.", "They have higher breathing rates."],
+          answer: 2,
+          rationale: "",
+        },
+
+        /* MS */
+        {
+          id: "ms1",
+          type: "ms",
+          category: DOMAINS[2],
+          difficulty: "medium",
+          prompt: "Which of the following are typical symptoms of someone suffering from acute stroke?",
+          choices: ["numbness or weakness of the face, arm, or leg", "confusion, speech problems, and cognitive defects", "normal vision", "impaired coordination and walking"],
+          answer: [0, 1, 3],
+          rationale: "",
+        },
+        {
+          id: "ms2",
+          type: "ms",
+          category: DOMAINS[1],
+          difficulty: "hard",
+          prompt: "Which of the following accurately describes fibromyalgia? Select all that apply.",
+          choices: [
+            "characterized by local tissue injury",
+            "only occurs in patients with depression",
+            "responds well to most interventions with known analgesic effects",
+            "characterized by widespread muscle, joint, and connective tissue pain",
+            "occurs in the absence of tissue injury",
+          ],
+          answer: [3, 4],
+          rationale: "",
+        },
+
+        /* DD matching */
+        {
+          id: "dd1",
+          type: "dd",
+          category: DOMAINS[1],
+          difficulty: "medium",
+          prompt: "Type: Matching drag drop\n\nMatch the pain with the structure and pathology.",
+          dd: {
+            tokens: ["musculoskeletal pain", "chronic inflammation", "serious pathology", "lumbar stenosis", "bone pain"],
+            zones: [
+              { label: "pain that decreases at rest", accept: "musculoskeletal pain" },
+              { label: "morning pain that decreases with movement", accept: "chronic inflammation" },
+              { label: "pain at night that is intractable", accept: "serious pathology" },
+              { label: "pain that occurs with walking but is relieved when seated", accept: "lumbar stenosis" },
+              { label: "pain at rest and during activity", accept: "bone pain" },
+            ],
+          },
+          rationale: "",
+        },
+        {
+          id: "dd2",
+          type: "dd",
+          category: DOMAINS[1],
+          difficulty: "medium",
+          prompt: "Type: Matching drag drop\n\nMatch the motor function.",
+          dd: {
+            tokens: ["C2", "C4", "C6", "C8"],
+            zones: [
+              { label: "cervical extension", accept: "C2" },
+              { label: "shoulder shrug", accept: "C4" },
+              { label: "elbow flexion and wrist extension", accept: "C6" },
+              { label: "thumb extension", accept: "C8" },
+            ],
+          },
+          rationale: "",
+        },
+
+        /* HS (UPDATED question text; image is a placeholder path you will replace) */
+        {
+          id: "hs_knee1",
+          type: "hs",
+          category: DOMAINS[1],
+          difficulty: "medium",
+          prompt: `During the evaluation of a patients knee injury the athletic trainer palpates the tibial tuberosity. On the image below, identify the tibial tuberosity.
+
+Use your mouse and click/drag the circle to the area/region to be identified. You may reposition the circle until you are satisfied with its placement.`,
+          hs: {
+            imageSrc: "Images/Knee cap.png", // <- replace with your actual file path (e.g., images/knee.png)
+            tolerancePct: 6, // <- radius tolerance in % of container min dimension
+            answer: { xPct: 51.6, yPct: 86.6 }, // <- correct answer coordinates in % of image dimensions (0,0 is top-left; 100,100 is bottom-right)
+          },
+          rationale: "",
+        },
+
+        /* Focused Testlet */
+        {
+          id: "ft1",
+          type: "ft",
+          category: DOMAINS[1],
+          difficulty: "hard",
+          title: "Focused testlet",
+          scenario:
+            "A 70-year-old client presents to your clinic with shoulder pain that is worse at night. The client does not remember any trauma and reports insidious onset. Her AROM is limited in shoulder flexion and abduction. She has a positive painful arc and has weakness in abduction and external rotation.",
+          questions: [
+            {
+              id: "ft1_q1",
+              type: "ms",
+              prompt: "1. What are the most appropriate special tests to perform. Select all that apply.",
+              choices: ["Spurling’s", "Apprehension test", "Empty can", "Crank test"],
+              answer: [2],
+              rationale: "",
+            },
+            {
+              id: "ft1_q2",
+              type: "mc",
+              prompt:
+                "No change in symptoms is noted with the Spurling’s test, apprehension test, or crank test. The empty can test was positive.\n\n2. Based on the noted shoulder weakness and positive special test, the most likely diagnosis is",
+              choices: ["rotator cuff tear", "radiculopathy", "partial radiculopathy", "inconclusive (further testing needed)"],
+              answer: 0,
+              rationale: "",
+            },
+            {
+              id: "ft1_q3",
+              type: "ms",
+              prompt: "3. You would like to start your patient on AAROM exercises for home. What are the most appropriate exercises for your patient to perform at home? Select all that apply.",
+              choices: ["wall climbs using fingers to assist", "pendulums", "bilateral shoulder flexion using a cane", "wall push-ups"],
+              answer: [0, 2],
+              rationale: "",
+            },
+            {
+              id: "ft1_q4",
+              type: "mc",
+              prompt: "4. (Placeholder) Add your 4th testlet question here.",
+              choices: ["Option A", "Option B", "Option C", "Option D"],
+              answer: 0,
+              rationale: "Replace this placeholder with your content.",
+            },
+            {
+              id: "ft1_q5",
+              type: "ms",
+              prompt: "5. (Placeholder) Add your 5th testlet question here. Select all that apply.",
+              choices: ["Option A", "Option B", "Option C", "Option D"],
+              answer: [0],
+              rationale: "Replace this placeholder with your content.",
+            },
+          ],
+        },
+      ];
+
+      /* -------------------- Persistence (no accounts) -------------------- */
+      const STORAGE_KEY_ATTEMPTS = "quiz_attempts_v1";
+
+      function loadJSON(key, fallback) {
+        try {
+          const raw = localStorage.getItem(key);
+          if (!raw) return fallback;
+          const obj = JSON.parse(raw);
+          return obj && typeof obj === "object" ? obj : fallback;
+        } catch {
+          return fallback;
+        }
+      }
+      function saveJSON(key, obj) {
+        try {
+          localStorage.setItem(key, JSON.stringify(obj));
+        } catch {}
+      }
+
+      /**
+attempts: {
+  [questionId]: { bestScore: 0..1, attempts: number, totalTimeMs: number, lastScore: 0..1, lastTs: epoch }
+}
+*/
+      function loadAttempts() {
+        return loadJSON(STORAGE_KEY_ATTEMPTS, {});
+      }
+      function saveAttempts(a) {
+        saveJSON(STORAGE_KEY_ATTEMPTS, a);
+      }
+
+      /* -------------------- App state -------------------- */
+      const state = {
+        mode: "filtered",
+        queue: [],
+        currentQuestion: null,
+        questionStartTs: null,
+        attempts: loadAttempts(),
+        testlet: null,
+      };
+
+      /* -------------------- DOM -------------------- */
+      const el = (id) => document.getElementById(id);
+      const domainSel = el("domainSel");
+      const diffSel = el("diffSel");
+      const btnNext = el("btnNext");
+      const btnRetryWrong = el("btnRetryWrong");
+      const btnResetAttempts = el("btnResetAttempts");
+
+      const qMeta = el("qMeta");
+      const qText = el("qText");
+      const qUI = el("qUI");
+      const feedback = el("feedback");
+      const wrongList = el("wrongList");
+
+      const pillTotal = el("pill-total");
+      const pillFiltered = el("pill-filtered");
+      const pillScore = el("pill-score");
+      const pillWrong = el("pill-wrong");
+
+      const sessionTimeEl = el("sessionTime");
+      const questionTimeEl = el("questionTime");
+      const btnTimerStart = el("btnTimerStart");
+      const btnTimerPause = el("btnTimerPause");
+      const btnTimerReset = el("btnTimerReset");
+
+      /* -------------------- Stopwatch -------------------- */
+      const timer = { running: false, sessionMs: 0, questionMs: 0, lastTick: null, intervalId: null };
+
+      /* -------------------- init -------------------- */
+      init();
+      function init() {
+        el("year").textContent = String(new Date().getFullYear());
+        const domains = ["all", ...DOMAINS];
+        domainSel.innerHTML = domains.map((d) => `<option value="${escapeHtmlAttr(d)}">${d === "all" ? "All" : escapeHtml(d)}</option>`).join("");
+        pillTotal.textContent = `Total: ${QUESTIONS.length}`;
+
+        domainSel.addEventListener("change", rebuildQueueFiltered);
+        diffSel.addEventListener("change", rebuildQueueFiltered);
+
+        btnNext.addEventListener("click", () => {
+          state.mode = "filtered";
+          if (state.queue.length === 0) rebuildQueueFiltered();
+          serveNext();
+        });
+
+        btnRetryWrong.addEventListener("click", () => {
+          state.mode = "wrong";
+          rebuildQueueWrong();
+          serveNext();
+        });
+
+        btnResetAttempts.addEventListener("click", () => {
+          state.attempts = {};
+          saveAttempts(state.attempts);
+          state.queue = [];
+          state.currentQuestion = null;
+          state.testlet = null;
+          rebuildQueueFiltered();
+          clearQuestionUI("Attempt data reset. Click “Start / Next”.");
+          renderSummaryPills();
+          renderWrongStack();
+        });
+
+        btnTimerStart.addEventListener("click", startTimer);
+        btnTimerPause.addEventListener("click", pauseTimer);
+        btnTimerReset.addEventListener("click", resetTimer);
+
+        rebuildQueueFiltered();
+        renderSummaryPills();
+        renderWrongStack();
+      }
+
+      /* -------------------- mastery / filtering -------------------- */
+      function isMastered(qid) {
+        const a = state.attempts[qid];
+        return a && a.bestScore >= 1;
+      }
+      function getFilteredQuestions() {
+        const dom = domainSel.value;
+        const dif = diffSel.value;
+
+        return QUESTIONS.filter((q) => {
+          const domOk = dom === "all" || q.category === dom;
+          const difOk = dif === "all" || q.difficulty === dif;
+          const notMastered = !isMastered(q.id);
+          return domOk && difOk && notMastered;
+        });
+      }
+      function rebuildQueueFiltered() {
+        const ids = getFilteredQuestions().map((q) => q.id);
+        state.queue = shuffle(ids);
+        pillFiltered.textContent = `In set: ${state.queue.length}`;
+        renderSummaryPills();
+        renderWrongStack();
+      }
+      function rebuildQueueWrong() {
+        const dom = domainSel.value;
+        const dif = diffSel.value;
+
+        const wrongIds = Object.entries(state.attempts)
+          .filter(([qid, a]) => a.bestScore < 1)
+          .map(([qid]) => qid)
+          .filter((qid) => {
+            const q = QUESTIONS.find((x) => x.id === qid);
+            if (!q) return false;
+            const domOk = dom === "all" || q.category === dom;
+            const difOk = dif === "all" || q.difficulty === dif;
+            return domOk && difOk;
+          });
+
+        state.queue = shuffle(wrongIds);
+        pillFiltered.textContent = `In set: ${state.queue.length}`;
+        renderSummaryPills();
+        renderWrongStack();
+      }
+
+      /* -------------------- serving / UI -------------------- */
+      function serveNext() {
+        clearFeedback();
+
+        if (state.queue.length === 0) {
+          state.currentQuestion = null;
+          state.testlet = null;
+          qMeta.textContent = "";
+          qUI.innerHTML = "";
+          state.questionStartTs = null;
+          timer.questionMs = 0;
+          renderTimer();
+          qText.textContent =
+            state.mode === "wrong" ? "Wrong stack is empty (or all wrong items are mastered under the current filters)." : "No remaining questions in the current filters (or you mastered them all).";
+          renderSummaryPills();
+          renderWrongStack();
+          return;
+        }
+
+        const nextId = state.queue.shift();
+        const q = QUESTIONS.find((x) => x.id === nextId);
+        state.currentQuestion = q;
+        state.questionStartTs = Date.now();
+        timer.questionMs = 0;
+        state.testlet = null;
+
+        qMeta.innerHTML = `
+    <span class="pill">Type: ${labelType(q.type)}</span>
+    <span class="pill">Category: ${escapeHtml(q.category)}</span>
+    <span class="pill">Difficulty: ${q.difficulty}</span>
+    <span class="pill">Mode: ${state.mode === "wrong" ? "Retry Wrong" : "Filtered Study"}</span>
+  `;
+
+        qText.textContent = q.type === "ft" ? q.title || "Focused testlet" : q.prompt;
+        qUI.innerHTML = "";
+
+        if (q.type === "mc") renderMC(q);
+        if (q.type === "ms") renderMS(q);
+        if (q.type === "dd") renderDD(q);
+        if (q.type === "hs") renderHS(q);
+        if (q.type === "ft") renderFT(q);
+
+        renderSummaryPills();
+        renderWrongStack();
+      }
+
+      function clearQuestionUI(message) {
+        state.currentQuestion = null;
+        state.testlet = null;
+        qMeta.textContent = "";
+        qUI.innerHTML = "";
+        clearFeedback();
+        if (message) qText.textContent = message;
+      }
+
+      /* -------------------- attempts / summary -------------------- */
+      function recordAttempt(qid, score01, timeMs) {
+        const prev = state.attempts[qid] || { bestScore: 0, attempts: 0, totalTimeMs: 0, lastScore: 0, lastTs: 0 };
+        const next = {
+          bestScore: Math.max(prev.bestScore, score01),
+          attempts: prev.attempts + 1,
+          totalTimeMs: prev.totalTimeMs + (timeMs || 0),
+          lastScore: score01,
+          lastTs: Date.now(),
+        };
+        state.attempts[qid] = next;
+        saveAttempts(state.attempts);
+      }
+      function computeQuestionTimeMs() {
+        if (!state.questionStartTs) return 0;
+        if (timer.running) return timer.questionMs;
+        return Math.max(0, Date.now() - state.questionStartTs);
+      }
+      function renderSummaryPills() {
+        const attemptedIds = Object.keys(state.attempts);
+        const attemptedCount = attemptedIds.length;
+        const avgBest = attemptedCount === 0 ? 0 : attemptedIds.reduce((s, qid) => s + state.attempts[qid].bestScore, 0) / attemptedCount;
+
+        pillScore.textContent = `Score: ${(avgBest * 100).toFixed(1)}%`;
+        pillFiltered.textContent = `In set: ${state.queue.length}`;
+
+        const wrongIds = attemptedIds.filter((qid) => state.attempts[qid].bestScore < 1);
+        pillWrong.textContent = `Wrong stack: ${wrongIds.length}`;
+      }
+      function renderWrongStack() {
+        const attemptedIds = Object.keys(state.attempts);
+        const wrongIds = attemptedIds.filter((qid) => state.attempts[qid].bestScore < 1).sort((a, b) => (state.attempts[b].lastTs || 0) - (state.attempts[a].lastTs || 0));
+
+        if (wrongIds.length === 0) {
+          wrongList.textContent = "None yet.";
+          wrongList.style.whiteSpace = "normal";
+          return;
+        }
+
+        const lines = wrongIds.map((qid) => {
+          const q = QUESTIONS.find((x) => x.id === qid);
+          const a = state.attempts[qid];
+          const best = (a.bestScore * 100).toFixed(0);
+          return `• ${q.category} / ${q.difficulty} / ${labelType(q.type)} — best ${best}% (attempts ${a.attempts})`;
+        });
+
+        wrongList.textContent = lines.join("\n");
+        wrongList.style.whiteSpace = "pre-line";
+      }
+
+      /* -------------------- feedback -------------------- */
+      function showFeedback(score01, rationale, extraLine) {
+        feedback.style.display = "block";
+        const isPerfect = score01 >= 1;
+        feedback.className = `feedback ${isPerfect ? "ok" : "bad"}`;
+        const pct = (score01 * 100).toFixed(0);
+
+        feedback.innerHTML = `
+    <div style="font-weight:800;margin-bottom:4px;">
+      ${isPerfect ? "Correct" : "Not fully correct"} — ${pct}%
+    </div>
+    ${extraLine ? `<div class="muted" style="margin-bottom:6px;">${escapeHtml(extraLine)}</div>` : ""}
+    <div class="muted">${escapeHtml(rationale || "")}</div>
+  `;
+      }
+      function clearFeedback() {
+        feedback.style.display = "none";
+        feedback.className = "feedback";
+        feedback.textContent = "";
+      }
+
+      /* -------------------- scoring rules -------------------- */
+      function scoreMultiSelect(pickedArr, correctArr) {
+        const picked = new Set(pickedArr);
+        const correct = new Set(correctArr);
+        let correctChosen = 0,
+          incorrectChosen = 0;
+        for (const x of picked) correct.has(x) ? correctChosen++ : incorrectChosen++;
+        const denom = Math.max(1, correct.size);
+        return clamp01((correctChosen - incorrectChosen) / denom);
+      }
+      function scoreDragDrop(placements, zones) {
+        const total = Math.max(1, zones.length);
+        let ok = 0;
+        for (const z of zones) if (placements.get(z.label) === z.accept) ok++;
+        return ok / total;
+      }
+
+      /* -------------------- renderers: MC / MS / DD -------------------- */
+      function renderMC(q) {
+        const wrap = document.createElement("div");
+        wrap.className = "answers";
+        q.choices.forEach((choice, idx) => {
+          const div = document.createElement("label");
+          div.className = "answer";
+          div.innerHTML = `<input type="radio" name="mc" value="${idx}" /> ${escapeHtml(choice)}`;
+          wrap.appendChild(div);
+        });
+
+        const btn = document.createElement("button");
+        btn.className = "primary";
+        btn.textContent = "Submit";
+        btn.addEventListener("click", () => {
+          const picked = wrap.querySelector('input[name="mc"]:checked');
+          if (!picked) return;
+          const score01 = Number(picked.value) === q.answer ? 1 : 0;
+          recordAttempt(q.id, score01, computeQuestionTimeMs());
+          showFeedback(score01, q.rationale);
+          renderSummaryPills();
+          renderWrongStack();
+        });
+
+        qUI.appendChild(wrap);
+        qUI.appendChild(spacer());
+        qUI.appendChild(btn);
+      }
+
+      function renderMS(q) {
+        const wrap = document.createElement("div");
+        wrap.className = "answers";
+        q.choices.forEach((choice, idx) => {
+          const div = document.createElement("label");
+          div.className = "answer";
+          div.innerHTML = `<input type="checkbox" value="${idx}" /> ${escapeHtml(choice)}`;
+          wrap.appendChild(div);
+        });
+
+        const btn = document.createElement("button");
+        btn.className = "primary";
+        btn.textContent = "Submit";
+        btn.addEventListener("click", () => {
+          const picked = Array.from(wrap.querySelectorAll('input[type="checkbox"]:checked'))
+            .map((x) => Number(x.value))
+            .sort((a, b) => a - b);
+          const score01 = scoreMultiSelect(picked, q.answer);
+          recordAttempt(q.id, score01, computeQuestionTimeMs());
+          showFeedback(score01, q.rationale, score01 < 1 ? "Partial credit enabled for multi-select." : undefined);
+          renderSummaryPills();
+          renderWrongStack();
+        });
+
+        qUI.appendChild(wrap);
+        qUI.appendChild(spacer());
+        qUI.appendChild(btn);
+      }
+
+      function renderDD(q) {
+        const wrap = document.createElement("div");
+        wrap.className = "dd-wrap";
+
+        const bank = document.createElement("div");
+        bank.className = "dd-bank";
+        const placements = new Map();
+
+        function makeToken(text) {
+          const t = document.createElement("div");
+          t.className = "token";
+          t.textContent = text;
+          t.draggable = true;
+          t.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", text));
+          return t;
+        }
+        q.dd.tokens.forEach((token) => bank.appendChild(makeToken(token)));
+
+        const zonesWrap = document.createElement("div");
+        zonesWrap.className = "drop-zones";
+
+        q.dd.zones.forEach((z) => {
+          const zone = document.createElement("div");
+          zone.className = "zone";
+
+          const left = document.createElement("div");
+          left.className = "label";
+          left.textContent = z.label;
+
+          const slot = document.createElement("div");
+          slot.className = "slot";
+          slot.textContent = "Drop here";
+
+          slot.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            slot.classList.add("over");
+          });
+          slot.addEventListener("dragleave", () => slot.classList.remove("over"));
+          slot.addEventListener("drop", (e) => {
+            e.preventDefault();
+            slot.classList.remove("over");
+            const tokenText = e.dataTransfer.getData("text/plain");
+            if (!tokenText) return;
+            for (const [zl, tt] of placements.entries()) if (tt === tokenText) placements.delete(zl);
+            placements.set(z.label, tokenText);
+            slot.textContent = tokenText;
+          });
+
+          slot.addEventListener("click", () => {
+            placements.delete(z.label);
+            slot.textContent = "Drop here";
+          });
+
+          zone.appendChild(left);
+          zone.appendChild(slot);
+          zonesWrap.appendChild(zone);
+        });
+
+        const hint = document.createElement("div");
+        hint.className = "muted";
+        hint.textContent = "Tip: click a drop slot to clear it.";
+
+        const btn = document.createElement("button");
+        btn.className = "primary";
+        btn.textContent = "Submit";
+        btn.addEventListener("click", () => {
+          const missing = q.dd.zones.some((z) => !placements.get(z.label));
+          if (missing) return;
+          const score01 = scoreDragDrop(placements, q.dd.zones);
+          recordAttempt(q.id, score01, computeQuestionTimeMs());
+          showFeedback(score01, q.rationale, score01 < 1 ? "Partial credit enabled for drag-and-drop." : undefined);
+          renderSummaryPills();
+          renderWrongStack();
+        });
+
+        wrap.appendChild(bank);
+        wrap.appendChild(zonesWrap);
+        wrap.appendChild(hint);
+        wrap.appendChild(btn);
+        qUI.appendChild(wrap);
+      }
+
+      /* -------------------- Hot spot renderer (circle placement) -------------------- */
+      function renderHS(q) {
+        const hs = q.hs || {};
+        const wrap = document.createElement("div");
+        wrap.className = "hsWrap";
+
+        // Stage with image + draggable circle
+        const stage = document.createElement("div");
+        stage.className = "hsStage";
+
+        const img = document.createElement("img");
+        img.alt = "Hot spot image";
+        img.src = hs.imageSrc || "";
+        stage.appendChild(img);
+
+        const overlay = document.createElement("div");
+        overlay.className = "hsOverlay";
+        stage.appendChild(overlay);
+
+        const circle = document.createElement("div");
+        circle.className = "hsCircle";
+        overlay.appendChild(circle);
+
+        // Info row
+        const hintRow = document.createElement("div");
+        hintRow.className = "hsHintRow";
+
+        const posPill = document.createElement("span");
+        posPill.className = "pill";
+        posPill.textContent = "circle: x=50.0%, y=50.0%";
+
+        const tolPill = document.createElement("span");
+        tolPill.className = "pill";
+        tolPill.textContent = `tolerance: ${Number(hs.tolerancePct ?? 6).toFixed(1)}%`;
+
+        const btnCenter = document.createElement("button");
+        btnCenter.className = "hsSmallBtn";
+        btnCenter.textContent = "Center circle";
+        btnCenter.type = "button";
+
+        hintRow.appendChild(posPill);
+        hintRow.appendChild(tolPill);
+        hintRow.appendChild(btnCenter);
+
+        // Submit button
+        const btnSubmit = document.createElement("button");
+        btnSubmit.className = "primary";
+        btnSubmit.textContent = "Submit";
+        btnSubmit.type = "button";
+
+        wrap.appendChild(stage);
+        wrap.appendChild(hintRow);
+        wrap.appendChild(btnSubmit);
+
+        qUI.appendChild(wrap);
+
+        // Runtime circle position (% of stage box)
+        let circlePos = { xPct: 50, yPct: 50 };
+
+        function setCirclePct(xPct, yPct) {
+          circlePos.xPct = clampPct(xPct);
+          circlePos.yPct = clampPct(yPct);
+          circle.style.left = circlePos.xPct + "%";
+          circle.style.top = circlePos.yPct + "%";
+          posPill.textContent = `circle: x=${circlePos.xPct.toFixed(1)}%, y=${circlePos.yPct.toFixed(1)}%`;
+        }
+        setCirclePct(50, 50);
+
+        btnCenter.addEventListener("click", () => setCirclePct(50, 50));
+
+        // Drag handling for circle
+        let dragging = false;
+
+        function clientToPct(clientX, clientY) {
+          const r = stage.getBoundingClientRect();
+          const xPx = clientX - r.left;
+          const yPx = clientY - r.top;
+          const xPct = (xPx / r.width) * 100;
+          const yPct = (yPx / r.height) * 100;
+          return { xPct, yPct };
+        }
+
+        circle.addEventListener("pointerdown", (e) => {
+          dragging = true;
+          circle.classList.add("dragging");
+          circle.setPointerCapture?.(e.pointerId);
+        });
+        overlay.addEventListener("pointermove", (e) => {
+          if (!dragging) return;
+          const p = clientToPct(e.clientX, e.clientY);
+          setCirclePct(p.xPct, p.yPct);
+        });
+        overlay.addEventListener("pointerup", () => {
+          dragging = false;
+          circle.classList.remove("dragging");
+        });
+        overlay.addEventListener("pointercancel", () => {
+          dragging = false;
+          circle.classList.remove("dragging");
+        });
+
+        // Submit checks distance against tolerance
+        btnSubmit.addEventListener("click", () => {
+          const ans = hs.answer || null;
+          if (!ans) {
+            showFeedback(0, "This hotspot item does not have a correct answer set.", "Add hs.answer { xPct, yPct } in the question data.");
+            return;
+          }
+
+          const tolPct = Number(hs.tolerancePct ?? 6);
+          const r = stage.getBoundingClientRect();
+          const minDim = Math.min(r.width, r.height);
+
+          const dxPx = ((circlePos.xPct - ans.xPct) / 100) * r.width;
+          const dyPx = ((circlePos.yPct - ans.yPct) / 100) * r.height;
+          const distPx = Math.hypot(dxPx, dyPx);
+          const tolPx = (tolPct / 100) * minDim;
+
+          const score01 = distPx <= tolPx ? 1 : 0;
+          recordAttempt(q.id, score01, computeQuestionTimeMs());
+
+          const extra = score01 ? undefined : "Your circle is outside the tolerance. Try repositioning and submit again.";
+          showFeedback(score01, q.rationale, extra);
+          renderSummaryPills();
+          renderWrongStack();
+        });
+      }
+
+      /* -------------------- Focused Testlet renderer (unchanged) -------------------- */
+      function renderFT(q) {
+        state.testlet = { qIndex: 0, subScores: new Array(q.questions.length).fill(null) };
+
+        const container = document.createElement("div");
+        container.className = "dd-wrap";
+
+        const scenario = document.createElement("div");
+        scenario.className = "scenario";
+        scenario.innerHTML = `<div style="font-weight:800;margin-bottom:6px;">Scenario</div><div class="muted">${escapeHtml(q.scenario)}</div>`;
+
+        const nav = document.createElement("div");
+        nav.className = "testletNav";
+
+        const idxPill = document.createElement("span");
+        idxPill.className = "pill";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.textContent = "Previous";
+        btnPrev.disabled = true;
+
+        const btnNextSub = document.createElement("button");
+        btnNextSub.textContent = "Next question";
+
+        const btnFinish = document.createElement("button");
+        btnFinish.className = "primary";
+        btnFinish.textContent = "Finish testlet";
+        btnFinish.disabled = true;
+
+        const subArea = document.createElement("div");
+        const subFeedback = document.createElement("div");
+        subFeedback.className = "feedback";
+        subFeedback.style.display = "none";
+
+        nav.appendChild(idxPill);
+        nav.appendChild(btnPrev);
+        nav.appendChild(btnNextSub);
+        nav.appendChild(btnFinish);
+
+        container.appendChild(scenario);
+        container.appendChild(nav);
+        container.appendChild(subArea);
+        container.appendChild(subFeedback);
+
+        qUI.appendChild(container);
+
+        function updateNav() {
+          const i = state.testlet.qIndex;
+          idxPill.textContent = `Testlet question ${i + 1} of ${q.questions.length}`;
+          btnPrev.disabled = i === 0;
+          btnNextSub.disabled = i >= q.questions.length - 1;
+          btnFinish.disabled = state.testlet.subScores.some((s) => s === null);
+        }
+
+        function showSubFeedback(score01, rationale, extra) {
+          subFeedback.style.display = "block";
+          const isPerfect = score01 >= 1;
+          subFeedback.className = `feedback ${isPerfect ? "ok" : "bad"}`;
+          subFeedback.innerHTML = `
+      <div style="font-weight:800;margin-bottom:4px;">
+        ${isPerfect ? "Correct" : "Not fully correct"} — ${(score01 * 100).toFixed(0)}%
+      </div>
+      ${extra ? `<div class="muted" style="margin-bottom:6px;">${escapeHtml(extra)}</div>` : ""}
+      <div class="muted">${escapeHtml(rationale || "")}</div>
+    `;
+        }
+
+        function renderSubQuestion() {
+          subArea.innerHTML = "";
+          subFeedback.style.display = "none";
+
+          const i = state.testlet.qIndex;
+          const sq = q.questions[i];
+
+          const prompt = document.createElement("div");
+          prompt.className = "question-text";
+          prompt.textContent = sq.prompt;
+
+          subArea.appendChild(prompt);
+
+          if (sq.type === "mc") renderSubMC(sq, i);
+          else if (sq.type === "ms") renderSubMS(sq, i);
+          else {
+            const warn = document.createElement("div");
+            warn.className = "muted";
+            warn.textContent = "Unsupported testlet subquestion type in this example.";
+            subArea.appendChild(warn);
+          }
+
+          updateNav();
+        }
+
+        function renderSubMC(sq, index) {
+          const wrap = document.createElement("div");
+          wrap.className = "answers";
+
+          sq.choices.forEach((choice, idx) => {
+            const div = document.createElement("label");
+            div.className = "answer";
+            div.innerHTML = `<input type="radio" name="ft_mc_${index}" value="${idx}" /> ${escapeHtml(choice)}`;
+            wrap.appendChild(div);
+          });
+
+          const btnSubmit = document.createElement("button");
+          btnSubmit.className = "primary";
+          btnSubmit.textContent = "Submit this question";
+          btnSubmit.addEventListener("click", () => {
+            const picked = wrap.querySelector(`input[name="ft_mc_${index}"]:checked`);
+            if (!picked) return;
+            const score01 = Number(picked.value) === sq.answer ? 1 : 0;
+            state.testlet.subScores[index] = score01;
+            showSubFeedback(score01, sq.rationale);
+            updateNav();
+          });
+
+          subArea.appendChild(wrap);
+          subArea.appendChild(spacer());
+          subArea.appendChild(btnSubmit);
+        }
+
+        function renderSubMS(sq, index) {
+          const wrap = document.createElement("div");
+          wrap.className = "answers";
+
+          sq.choices.forEach((choice, idx) => {
+            const div = document.createElement("label");
+            div.className = "answer";
+            div.innerHTML = `<input type="checkbox" value="${idx}" /> ${escapeHtml(choice)}`;
+            wrap.appendChild(div);
+          });
+
+          const btnSubmit = document.createElement("button");
+          btnSubmit.className = "primary";
+          btnSubmit.textContent = "Submit this question";
+          btnSubmit.addEventListener("click", () => {
+            const picked = Array.from(wrap.querySelectorAll('input[type="checkbox"]:checked'))
+              .map((x) => Number(x.value))
+              .sort((a, b) => a - b);
+            const score01 = scoreMultiSelect(picked, sq.answer);
+            state.testlet.subScores[index] = score01;
+            showSubFeedback(score01, sq.rationale, score01 < 1 ? "Partial credit enabled for multi-select." : undefined);
+            updateNav();
+          });
+
+          subArea.appendChild(wrap);
+          subArea.appendChild(spacer());
+          subArea.appendChild(btnSubmit);
+        }
+
+        btnPrev.addEventListener("click", () => {
+          if (state.testlet.qIndex > 0) {
+            state.testlet.qIndex -= 1;
+            renderSubQuestion();
+          }
+        });
+        btnNextSub.addEventListener("click", () => {
+          if (state.testlet.qIndex < q.questions.length - 1) {
+            state.testlet.qIndex += 1;
+            renderSubQuestion();
+          }
+        });
+        btnFinish.addEventListener("click", () => {
+          const scores = state.testlet.subScores;
+          const avg = scores.reduce((s, v) => s + v, 0) / Math.max(1, scores.length);
+          recordAttempt(q.id, avg, computeQuestionTimeMs());
+          showFeedback(avg, "Focused testlet scored as the average of its associated question scores.", avg < 1 ? "Mastery requires 100% overall." : "Testlet complete.");
+          renderSummaryPills();
+          renderWrongStack();
+        });
+
+        renderSubQuestion();
+      }
+
+      /* -------------------- type labels -------------------- */
+      function labelType(type) {
+        return { mc: "Multiple choice", ms: "Multi-select", dd: "Drag-and-drop", hs: "Hot spot", ft: "Focused testlet" }[type] || type;
+      }
+
+      /* -------------------- stopwatch -------------------- */
+      function startTimer() {
+        if (timer.running) return;
+        timer.running = true;
+        timer.lastTick = Date.now();
+        timer.intervalId = setInterval(tickTimer, 200);
+      }
+      function pauseTimer() {
+        if (!timer.running) return;
+        timer.running = false;
+        if (timer.intervalId) clearInterval(timer.intervalId);
+        timer.intervalId = null;
+        timer.lastTick = null;
+        renderTimer();
+      }
+      function resetTimer() {
+        pauseTimer();
+        timer.sessionMs = 0;
+        timer.questionMs = 0;
+        state.questionStartTs = Date.now();
+        renderTimer();
+      }
+      function tickTimer() {
+        const now = Date.now();
+        const dt = Math.max(0, now - (timer.lastTick || now));
+        timer.lastTick = now;
+
+        timer.sessionMs += dt;
+        if (state.currentQuestion) timer.questionMs += dt;
+        renderTimer();
+      }
+      function renderTimer() {
+        sessionTimeEl.textContent = formatMMSS(timer.sessionMs);
+        questionTimeEl.textContent = formatMMSS(timer.questionMs);
+      }
+      function formatMMSS(ms) {
+        const totalSec = Math.floor(ms / 1000);
+        const m = Math.floor(totalSec / 60);
+        const s = totalSec % 60;
+        return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      }
+
+      /* -------------------- utilities -------------------- */
+      function spacer() {
+        const d = document.createElement("div");
+        d.style.height = "6px";
+        return d;
+      }
+      function clamp01(x) {
+        return Math.max(0, Math.min(1, x));
+      }
+      function clampPct(x) {
+        return Math.max(0, Math.min(100, x));
+      }
+      function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+      function escapeHtml(str) {
+        return String(str).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+      }
+      function escapeHtmlAttr(str) {
+        return escapeHtml(str).replaceAll("\n", " ");
+      }
+    </script>
+  </body>
+</html>
